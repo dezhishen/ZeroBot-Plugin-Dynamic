@@ -39,5 +39,5 @@ jobs:
             linux/arm/v7
             linux/arm64/v8
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository }}:${{ env.APP_VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.repository }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ lowercase(github.repository) }}:${{ env.APP_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ lowercase(github.repository) }}:latest
