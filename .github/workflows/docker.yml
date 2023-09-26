@@ -22,7 +22,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Generate App Version
-        run: echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
+        run: |
+          echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
+      - id: Generate Repo Name
+        uses: ASzc/change-string-case-action@v1
+        with:
+          string: ${{ github.repository }}
+      - run: |
+          echo REPO="${{ steps.string.outputs.lowercase }}" >> $GITHUB_ENV
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -39,5 +46,5 @@ jobs:
             linux/arm/v7
             linux/arm64/v8
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ lowercase(github.repository) }}:${{ env.APP_VERSION }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ lowercase(github.repository) }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.REPO }}:${{ env.APP_VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.REPO }}:latest
