@@ -24,12 +24,11 @@ jobs:
       - name: Generate App Version
         run: |
           echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
-      - name: Generate Repo Name
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ github.repository }}
-      - run: |
-          echo REPO="${{ steps.string.outputs.lowercase }}" >> $GITHUB_ENV
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      - name: use REPO
+        run: echo "The value of REPO is: ${REPO}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
