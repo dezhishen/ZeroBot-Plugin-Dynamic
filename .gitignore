@@ -6,3 +6,4 @@ go-zero*
 nohup.out
 zerobot
 plugins/
+config.json
