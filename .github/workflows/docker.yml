@@ -24,7 +24,7 @@ jobs:
       - name: Generate App Version
         run: |
           echo APP_VERSION=`git describe --tags --always` >> $GITHUB_ENV
-      - id: Generate Repo Name
+      - name: Generate Repo Name
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.repository }}
