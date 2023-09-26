@@ -16,6 +16,7 @@
 // Currently plugins are only supported on Linux, FreeBSD, and macOS.
 // Please report any issues.
 
+//go:build windows
 // +build windows
 
 package plugin
@@ -47,7 +48,7 @@ func (p *Plugin) Lookup(symName string) (Symbol, error) {
 // If a path is noth opened, it is ignored.
 // It is safe for concurrent use by multiple goroutines.
 func Close(p *Plugin) error {
-	return unload(p)
+	return unload(p.pluginpath)
 }
 
 // A Symbol is a pointer to a variable or function.

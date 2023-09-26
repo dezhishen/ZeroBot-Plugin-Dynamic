@@ -24,6 +24,7 @@ import (
 	"github.com/FloatTech/ZeroBot-Plugin/kanban/banner"
 
 	_ "github.com/FloatTech/ZeroBot-Plugin-Dynamic/dyloader"
+	_ "github.com/mattn/go-sqlite3" // sqlite3
 )
 
 type zbpcfg struct {
